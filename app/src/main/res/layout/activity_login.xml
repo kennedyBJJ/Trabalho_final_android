@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -27,7 +34,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/edtUsuario"
         style="@style/Edit_Text"
         android:drawableRight="@drawable/ic_user"
         android:layout_width="match_parent"
@@ -38,7 +45,7 @@
         android:inputType="text" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/edtSenha"
         style="@style/Edit_Text"
         android:drawableRight="@drawable/ic_eye"
         android:layout_width="match_parent"
@@ -46,19 +53,28 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="senha"
-        android:inputType="text" />
+        android:inputType="numberPassword" />
+
+    <ProgressBar
+        android:layout_width="384dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        android:textAlignment="center" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn1"
         style="@style/Button"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="160dp"
         android:text="ENTRAR"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:cornerRadius="20dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn2"
-        style="@style/Button"
+        style="@style/Button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -67,3 +83,4 @@
 
 
 </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
