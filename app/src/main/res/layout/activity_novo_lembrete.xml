@@ -19,7 +19,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Meus lembretes"
+            android:text="Novo lembrete"
             android:textAlignment="center"
             android:textColor="#4C4949"
             android:textSize="20sp"
@@ -29,7 +29,7 @@
         <ListView
             style="@style/Edit_Text"
             android:layout_width="349dp"
-            android:layout_height="339dp"
+            android:layout_height="462dp"
             android:layout_marginTop="20dp"
             android:autofillHints="Não há lembretes cadastrados ainda!" />
 
@@ -38,8 +38,8 @@
             style="@style/Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="NOVO LEMBRETE"
+            android:layout_marginTop="30dp"
+            android:text="SALVAR"
             android:textAlignment="center"
             android:textColor="#FFFEFE"
             android:textSize="16sp"
@@ -50,31 +50,11 @@
             style="@style/Button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="MEUS MEDICAMENTOS"
+            android:text="CANCELAR"
             android:textAlignment="center"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnFarmacia"
-            style="@style/Button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="VER FARMÁCIAS PROXIMAS"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnMinhaConta"
-            style="@style/Button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="MINHA CONTA"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:textStyle="bold" />
 
 
     </LinearLayout>

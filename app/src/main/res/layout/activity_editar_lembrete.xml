@@ -19,27 +19,49 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Meus lembretes"
+            android:text="Editando lembrete"
             android:textAlignment="center"
             android:textColor="#4C4949"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-
-        <ListView
+        <AutoCompleteTextView
+            android:id="@+id/tvSelecaoMedicamento"
             style="@style/Edit_Text"
-            android:layout_width="349dp"
-            android:layout_height="339dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:hint="Selecione um medicamento" />
+
+        <EditText
+            android:id="@+id/edtUsuario"
+            style="@style/Edit_Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:autofillHints="Não há lembretes cadastrados ainda!" />
+            android:ems="10"
+            android:hint="Informe um horário"
+            android:inputType="text" />
+
+        <!--        <androidx.appcompat.widget.AppCompatSpinner-->
+
+        <!--            android:id="@+id/spinner"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginRight="20dp"-->
+        <!--            android:layout_marginLeft="20dp"-->
+        <!--            android:color="@color/black"-->
+        <!--            android:radius="10dp"-->
+        <!--            android:layout_marginTop="20dp"/>-->
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnMeusLembretes"
             style="@style/Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="NOVO LEMBRETE"
+            android:layout_marginTop="300dp"
+            android:text="SALVAR ALTERAÇÕES"
             android:textAlignment="center"
             android:textColor="#FFFEFE"
             android:textSize="16sp"
@@ -50,28 +72,7 @@
             style="@style/Button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="MEUS MEDICAMENTOS"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnFarmacia"
-            style="@style/Button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="VER FARMÁCIAS PROXIMAS"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnMinhaConta"
-            style="@style/Button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="MINHA CONTA"
+            android:text="CANCELAR"
             android:textAlignment="center"
             android:textSize="16sp"
             android:textStyle="bold" />

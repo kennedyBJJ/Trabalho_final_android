@@ -31,10 +31,11 @@
             android:layout_width="349dp"
             android:layout_height="410dp"
             android:layout_marginTop="20dp"
-            android:autofillHints="Não há lembretes cadastrados ainda!" />
+            android:autofillHints="Não há lembretes cadastrados ainda!"
+            android:textAlignment="center" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnLembretes"
+            android:id="@+id/btnMeusLembretes"
             style="@style/Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,7 +47,7 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnMedicamentos"
+            android:id="@+id/btnMeusMedicamentos"
             style="@style/Button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
