@@ -1,24 +1,30 @@
 package com.example.trabalhofinal.DataBase;
 
-import static com.example.trabalhofinal.DataBase.criarBanco.TABELA_LEMBRETE;
-import static com.example.trabalhofinal.DataBase.criarBanco.getTabelaLembrete;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+<<<<<<< HE
 
-
+=======
+>>>>>>> 74e2e9ec9a54328f5a628bf4969d9513cb732cc2
 public class BancoControle {
 
+    //permite a conexão com o banco de dados
     private SQLiteDatabase db;
+<<<<<<< HEAD
+=======
+    //acessa o banco criado
+>>>>>>> 74e2e9ec9a54328f5a628bf4969d9513cb732cc2
     private CriarBanco banco;
 
 
     public BancoControle(Context contexto) {
-        banco = new criarBanco(contexto);
+        banco = new CriarBanco(contexto);
     }
 
-    public void inserirDadosUser(String NOME_USER, String DATA_NASCIMENTO, String TELEFONE){
+    public boolean inserirDadosUser(String NOME_USER, String DATA_NASCIMENTO, String TELEFONE){
+
+        //permite a escrita no banco
         db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -27,8 +33,53 @@ public class BancoControle {
         values.put(banco.DATA_NASCIMENTO, DATA_NASCIMENTO);
         values.put(banco.TELEFONE, TELEFONE);
 
+<<<<<<< HEAD
         db.insert(banco.getTabelaUser());
+=======
+        //insere os dados no banco
+       if(db.insert(banco.getTabelaUser(),null,values) == -1){
+           return false;
+       }
+>>>>>>> 74e2e9ec9a54328f5a628bf4969d9513cb732cc2
 
+       //encerra a conexão com o banco de dados
+       db.close();
+       return true;
+
+    }
+
+    public boolean inserirDadosMedicamento(int ID_USER_FK, String NOME_MEDICAMENTO, int QUANT_MEDICAMENTO){
+
+        db = banco.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(banco.ID_USER_FK, ID_USER_FK);
+        values.put(banco.NOME_MEDICAMENTO, NOME_MEDICAMENTO);
+        values.put(banco.QUANT_MEDICAMENTO, QUANT_MEDICAMENTO);
+
+        if(db.insert(banco.getTabelaMedic(),null,values) == -1){
+            return false;
+        }
+
+        db.close();
+        return true;
+    }
+
+    public boolean inserirDadosLembrete(int ID_USER_FK, int ID_MEDIC_FK, String HORA_LEMBRETE){
+
+        db = banco.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(banco.ID_USER_FK, ID_USER_FK);
+        values.put(banco.ID_MEDIC_FK, ID_MEDIC_FK);
+        values.put(banco.HORA_LEMBRETE, HORA_LEMBRETE);
+
+        if(db.insert(banco.getTabelaLembrete(),null,values) == -1){
+            return false;
+        }
+
+        db.close();
+        return true;
     }
 
     public void alteraDadosUsuario(int id, String NOME, String DATA, String NUMERO){
