@@ -1,8 +1,13 @@
-package com.example.trabalhofinal;
+package com.example.trabalhofinal.DataBase;
+
+import static com.example.trabalhofinal.DataBase.criarBanco.TABELA_LEMBRETE;
+import static com.example.trabalhofinal.DataBase.criarBanco.getTabelaLembrete;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.trabalhofinal.criarBanco;
 
 public class BancoControle {
 
@@ -25,5 +30,43 @@ public class BancoControle {
 
         db.insert(banco.getTabelaUser())
 
+    }
+
+    public void alteraDadosUsuario(int id, String NOME, String DATA, String NUMERO){
+        db = banco.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        String where = banco.ID_USER + "=" + id;
+
+        values.put(banco.NOME_USER, NOME);
+        values.put(banco.DATA_NASCIMENTO, DATA);
+        values.put(banco.TELEFONE, NUMERO);
+
+        db.update(banco.getTabelaUser(),values,where,null);
+        db.close();
+    }
+
+    public void alteraHoraLembrete(int id, String HORA){
+        db = banco.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        String where = banco.ID_LEMBRETE + "=" + id;
+
+        values.put(banco.HORA_LEMBRETE, HORA);
+
+        db.update(banco.getTabelaLembrete(),values,where,null);
+        db.close();
+    }
+
+    public void alteraMedicamento(int id, String NOME){
+        db = banco.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        String where = banco.ID_MEDIC + "=" + id;
+
+        values.put(banco.NOME_MEDICAMENTO, NOME);
+
+        db.update(banco.getTabelaMedic(),values,where,null);
+        db.close();
     }
 }

@@ -1,4 +1,4 @@
-package com.example.trabalhofinal;
+package com.example.trabalhofinal.DataBase;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -87,6 +87,4 @@ public class criarBanco extends SQLiteOpenHelper {
         onCreate(db);
 
     }
-
-
 }
