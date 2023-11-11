@@ -13,6 +13,7 @@ public class CriarBanco extends SQLiteOpenHelper {
     public static final String NOME_USER = "nome_user";
     public static final String DATA_NASCIMENTO = "data_nascimento";
     public static final String TELEFONE = "telefone";
+    public static final String SENHA = "senha";
     public static final String HORA_LEMBRETE = "hora_lembrete";
     public static final String NOME_MEDICAMENTO = "nome_medicamento";
     public static final String QUANT_MEDICAMENTO = "quant_medicamento";

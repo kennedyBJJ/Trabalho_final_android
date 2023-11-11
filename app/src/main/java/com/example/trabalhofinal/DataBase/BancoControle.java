@@ -15,7 +15,7 @@ public class BancoControle {
         banco = new CriarBanco(contexto);
     }
 
-    public boolean inserirDadosUser(String NOME_USER, String DATA_NASCIMENTO, String TELEFONE){
+    public boolean inserirDadosUser(String NOME_USER, String DATA_NASCIMENTO, String TELEFONE, String SENHA){
 
         //permite a escrita no banco
         db = banco.getWritableDatabase();
@@ -25,6 +25,7 @@ public class BancoControle {
         values.put(banco.NOME_USER, NOME_USER);
         values.put(banco.DATA_NASCIMENTO, DATA_NASCIMENTO);
         values.put(banco.TELEFONE, TELEFONE);
+        values.put(banco.SENHA, SENHA);
 
         //insere os dados no banco
        if(db.insert(banco.getTabelaUser(),null,values) == -1){
@@ -71,7 +72,7 @@ public class BancoControle {
         return true;
     }
 
-    public void alteraDadosUsuario(int id, String NOME, String DATA, String NUMERO){
+    public void alteraDadosUsuario(int id, String NOME, String DATA, String NUMERO, String SENHA){
         db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -80,6 +81,7 @@ public class BancoControle {
         values.put(banco.NOME_USER, NOME);
         values.put(banco.DATA_NASCIMENTO, DATA);
         values.put(banco.TELEFONE, NUMERO);
+        values.put(banco.SENHA, SENHA);
 
         db.update(banco.getTabelaUser(),values,where,null);
         db.close();
