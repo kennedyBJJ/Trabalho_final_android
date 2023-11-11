@@ -4,9 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
-public class criarBanco extends SQLiteOpenHelper {
+public class CriarBanco extends SQLiteOpenHelper {
 
     public static String BANCO = "banco";
     public static final String TABELA_USER = "user";
@@ -25,19 +23,19 @@ public class criarBanco extends SQLiteOpenHelper {
     public static final String ID_USER_FK = "idUser_FK";
     public static final String ID_MEDIC_FK = "idMedic_FK";
 
-    public criarBanco(Context context) {
+    public CriarBanco(Context context) {
         super(context, BANCO, null, VERSION);
     }
 
-    public static String getTabelaUser(){
+    public String getTabelaUser(){
         return TABELA_USER;
     }
 
-    public static String getTabelaMedic(){
+    public String getTabelaMedic(){
         return TABELA_MEDIC;
     }
 
-    public static String getTabelaLembrete(){
+    public String getTabelaLembrete(){
         return TABELA_LEMBRETE;
     }
 
@@ -57,7 +55,8 @@ public class criarBanco extends SQLiteOpenHelper {
                        "(\n" +
                         ID_MEDIC + " INTEGER PRIMARY KEY AUTOINCREMENT, \n" +
                         NOME_MEDICAMENTO + " TEXT NOT NULL, \n" +
-                        QUANT_MEDICAMENTO + " INTEGER NOT NULL \n" +
+                        QUANT_MEDICAMENTO + " INTEGER NOT NULL, \n" +
+                        "FOREIGN KEY (" + ID_USER_FK + ") REFERENCES " + TABELA_USER + "(" + ID_USER + ") \n" +
                         ");\n";
 
         String sql3 = "CREATE TABLE IF NOT EXISTS " + TABELA_LEMBRETE +
