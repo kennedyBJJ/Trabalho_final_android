@@ -34,7 +34,7 @@
             android:autofillHints="Não há lembretes cadastrados ainda!" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnMeusLembretes"
+            android:id="@+id/btnNovoLembret"
             style="@style/Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnMeusMedicamentos"
+            android:id="@+id/btnCancelarMedicamento"
             style="@style/Button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
