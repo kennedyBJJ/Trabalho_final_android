@@ -33,6 +33,5 @@ public class Form_Cadastro extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//
     }
 }
