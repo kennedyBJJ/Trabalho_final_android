@@ -7,12 +7,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.trabalhofinal.criarBanco;
 
 public class BancoControle {
 
     private SQLiteDatabase db;
-    private criarBanco banco;
+    private CriarBanco banco;
 
 
     public BancoControle(Context contexto) {
@@ -28,7 +27,7 @@ public class BancoControle {
         values.put(banco.DATA_NASCIMENTO, DATA_NASCIMENTO);
         values.put(banco.TELEFONE, TELEFONE);
 
-        db.insert(banco.getTabelaUser())
+        db.insert(banco.getTabelaUser());
 
     }
 
