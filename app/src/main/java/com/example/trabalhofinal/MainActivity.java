@@ -11,7 +11,6 @@ import android.webkit.WebView;
 import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
-
     //Timer
     private static int SPLASH_TIME_OUT = 4000;
 
