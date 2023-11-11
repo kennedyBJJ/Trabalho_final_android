@@ -3,18 +3,11 @@ package com.example.trabalhofinal.DataBase;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-<<<<<<< HE
 
-=======
->>>>>>> 74e2e9ec9a54328f5a628bf4969d9513cb732cc2
 public class BancoControle {
 
     //permite a conexão com o banco de dados
     private SQLiteDatabase db;
-<<<<<<< HEAD
-=======
-    //acessa o banco criado
->>>>>>> 74e2e9ec9a54328f5a628bf4969d9513cb732cc2
     private CriarBanco banco;
 
 
@@ -33,14 +26,10 @@ public class BancoControle {
         values.put(banco.DATA_NASCIMENTO, DATA_NASCIMENTO);
         values.put(banco.TELEFONE, TELEFONE);
 
-<<<<<<< HEAD
-        db.insert(banco.getTabelaUser());
-=======
         //insere os dados no banco
        if(db.insert(banco.getTabelaUser(),null,values) == -1){
            return false;
        }
->>>>>>> 74e2e9ec9a54328f5a628bf4969d9513cb732cc2
 
        //encerra a conexão com o banco de dados
        db.close();

@@ -6,13 +6,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.widget.VideoView;
+
+import com.example.trabalhofinal.Localization.LocalizacaoMain;
 
 public class MainActivity extends AppCompatActivity {
     //Timer
-    private static int SPLASH_TIME_OUT = 4000;
+    private static int SPLASH_TIME_OUT = 0;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -23,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(MainActivity.this, Login.class);
+                //mofifiquei para testes
+                Intent i = new Intent(MainActivity.this, LocalizacaoMain.class);
                 startActivity(i);
 
                 finish();

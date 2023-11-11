@@ -6,25 +6,25 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class CriarBanco extends SQLiteOpenHelper {
 
-    public static String BANCO = "banco";
-    public static final String TABELA_USER = "user";
-    public static final String TABELA_MEDIC = "medicamentos";
-    public static final String TABELA_LEMBRETE = "lembretes";
-    public static final String NOME_USER = "nome_user";
-    public static final String DATA_NASCIMENTO = "data_nascimento";
-    public static final String TELEFONE = "telefone";
-    public static final String HORA_LEMBRETE = "hora_lembrete";
-    public static final String NOME_MEDICAMENTO = "nome_medicamento";
-    public static final String QUANT_MEDICAMENTO = "quant_medicamento";
-    public static final int VERSION = 1;
-    public static final String ID_USER = "_id";
-    public static final String ID_LEMBRETE = "idLembrete";
-    public static final String ID_MEDIC = "idMedicamento";
-    public static final String ID_USER_FK = "idUser_FK";
-    public static final String ID_MEDIC_FK = "idMedic_FK";
+    public  static final String BANCO = "banco";
+    public  final String TABELA_USER = "user";
+    public  final String TABELA_MEDIC = "medicamentos";
+    public  final String TABELA_LEMBRETE = "lembretes";
+    public  final String NOME_USER = "nome_user";
+    public  final String DATA_NASCIMENTO = "data_nascimento";
+    public  final String TELEFONE = "telefone";
+    public  final String HORA_LEMBRETE = "hora_lembrete";
+    public  final String NOME_MEDICAMENTO = "nome_medicamento";
+    public  final String QUANT_MEDICAMENTO = "quant_medicamento";
+    public  static final int VERSION = 1;
+    public  final String ID_USER = "_id";
+    public  final String ID_LEMBRETE = "idLembrete";
+    public  final String ID_MEDIC = "idMedicamento";
+    public  final String ID_USER_FK = "idUser_FK";
+    public  final String ID_MEDIC_FK = "idMedic_FK";
 
     public CriarBanco(Context context) {
-        super(context, BANCO, null, VERSION);
+        super(context, CriarBanco.BANCO, null, CriarBanco.VERSION);
     }
 
     public String getTabelaUser(){
