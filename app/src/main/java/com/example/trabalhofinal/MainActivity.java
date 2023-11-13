@@ -11,7 +11,7 @@ import com.example.trabalhofinal.Localization.LocalizacaoMain;
 
 public class MainActivity extends AppCompatActivity {
     //Timer
-    private static int SPLASH_TIME_OUT = 0;
+    private static int SPLASH_TIME_OUT = 4000;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 //mofifiquei para testes
-                Intent i = new Intent(MainActivity.this, LocalizacaoMain.class);
+                Intent i = new Intent(MainActivity.this, Login.class);
                 startActivity(i);
 
                 finish();

@@ -23,6 +23,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrabalhoFinal"
         tools:targetApi="31">
+
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+
         <activity
             android:name=".Localization.LocalizacaoMain"
             android:exported="false" />
@@ -69,8 +76,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.example.trabalhofinal.Localization.FetchAddressService"/>
-
+        <service android:name=".Localization.FetchAddressService" />
     </application>
 
 </manifest>

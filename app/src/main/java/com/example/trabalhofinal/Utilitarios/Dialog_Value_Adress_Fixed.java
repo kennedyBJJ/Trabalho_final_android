@@ -11,6 +11,8 @@ public class Dialog_Value_Adress_Fixed {
     //----------VALORES------------------------
     public final int SUCCESS_RESULT = 0;
     public final int FAILURE_RESULT = 1;
+    public final String API_PLACES_KEY = "AIzaSyA9pmoMDAJ87YUp62KVqPTI5twBbqKfq3Y";
+    public final String OBJECTIVE_RESEARCH = "Farmácia";
 
     //---------ENDERECOS-------------------------
     public final String PACKAGE_NAME = "com.google.android.gms.location.sample.locationaddress";

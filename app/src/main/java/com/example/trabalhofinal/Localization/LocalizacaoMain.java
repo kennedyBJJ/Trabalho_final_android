@@ -14,10 +14,12 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.trabalhofinal.R;
 import com.example.trabalhofinal.Utilitarios.Dialog_Value_Adress_Fixed;
+import com.example.trabalhofinal.databinding.ActivityLocalizacaoBinding;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -30,25 +32,94 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.AutocompletePrediction;
+import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.RectangularBounds;
+import com.google.android.libraries.places.api.model.TypeFilter;
+import com.google.android.libraries.places.api.net.FetchPlaceRequest;
+import com.google.android.libraries.places.api.net.FetchPlaceResponse;
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse;
+import com.google.android.libraries.places.api.net.PlacesClient;
+
+import java.util.Arrays;
+import java.util.List;
 
 //Commit - Configurações iniciais do google play services
 //O Google Play Service opera em um nivel mais baixo do android
-public class LocalizacaoMain extends AppCompatActivity {
+public class LocalizacaoMain extends AppCompatActivity implements OnMapReadyCallback {
 
     FusedLocationProviderClient client;
     AddressResultReceiver resultReceiver;
     Dialog_Value_Adress_Fixed fixed;
 
+    private GoogleMap mMap;
+    private ActivityLocalizacaoBinding binding;
+    private PlacesClient placesClient;
+    private AutocompleteSessionToken token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_localizacao_main);
-
         client = LocationServices.getFusedLocationProviderClient(this);
         resultReceiver = new AddressResultReceiver(null);
         fixed = new Dialog_Value_Adress_Fixed();
+
+        binding = ActivityLocalizacaoBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(com.example.trabalhofinal.R.id.map);
+        mapFragment.getMapAsync(this);
+
+        String apiKey = fixed.API_PLACES_KEY;
+
+        //inicializando meu Place
+        Places.initialize(getApplicationContext(), apiKey);
+        //Criando o cliente do place
+        placesClient = Places.createClient(this);
+        //Criando uma instancia do token de acesso
+        token = AutocompleteSessionToken.newInstance();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        //Setando as liminatçoes de zoom
+
+        mMap.setMinZoomPreference(6.0f);
+        mMap.setMaxZoomPreference(20.0f);
+
+        //verificando as permições
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        //Apresentando o ponto azul da sua localizaão
+        mMap.setMyLocationEnabled(true);
+        //apresentando o botão de atalho para ativar a localizaçao do celular
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+
     }
 
     @Override
@@ -96,8 +167,78 @@ public class LocalizacaoMain extends AppCompatActivity {
 
                 if (location != null) {
                     String locationText = location.getLatitude() + " " + location.getLongitude();
+                    //  Toast.makeText(LocalizacaoMain.this, locationText, Toast.LENGTH_SHORT).show();
 
-                    Toast.makeText(LocalizacaoMain.this, locationText, Toast.LENGTH_SHORT).show();
+                    LatLng city = new LatLng(location.getLatitude(), location.getLongitude());
+
+                    MapStyleOptions style = MapStyleOptions.loadRawResourceStyle(LocalizacaoMain.this, R.raw.style_map_nigth);
+                    boolean teste = mMap.setMapStyle(style);
+
+                    Log.i("teste",String.valueOf(teste));
+                    //mMap.addMarker(new MarkerOptions().position(city).title("Estou aqui"));
+
+
+                    //Setando a posição no mapa + o zoom que o mapa deve apresentar
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(city, 17.0f));
+
+                    //Configurando o que vai acontecer quadno eu arrastar o mapa
+                    mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+                        @Override
+                        public void onCameraIdle() {
+                            //Com o Place configurado:
+                            FindAutocompletePredictionsRequest predictionsRequest = FindAutocompletePredictionsRequest.builder().setCountries("BR").setTypeFilter(TypeFilter.ESTABLISHMENT).setSessionToken(token).setLocationRestriction(RectangularBounds.newInstance( //Restringindo a busca no mapa para que ele não busque no brasil inteiro
+                                    mMap.getProjection().getVisibleRegion().latLngBounds //vai buscar os marcadores somente da região visivel do mapa
+                            )).setQuery(fixed.OBJECTIVE_RESEARCH).build();
+
+                            placesClient.findAutocompletePredictions(predictionsRequest).addOnCompleteListener(new OnCompleteListener<FindAutocompletePredictionsResponse>() {
+                                @Override
+                                public void onComplete(@NonNull Task<FindAutocompletePredictionsResponse> task) {
+                                    if (task.isSuccessful()) {
+                                        FindAutocompletePredictionsResponse result = task.getResult();
+                                        if (result != null) {
+                                            List<AutocompletePrediction> predictions = result.getAutocompletePredictions();
+
+                                            for (AutocompletePrediction p : predictions) {
+
+                                                /*List<Place.Type> placeType = p.getPlaceTypes();
+                                                for (Place.Type pt : placeType) {
+                                                    Toast.makeText(LocalizacaoMain.this, "tipo: " + pt.name(), Toast.LENGTH_SHORT).show();
+                                                }
+                                                */
+
+
+                                                //Toast.makeText(LocalizacaoMain.this, p.getFullText(null).toString(), Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(LocalizacaoMain.this, p.getPlaceId(), Toast.LENGTH_SHORT).show();
+
+                                                Log.i("Teste", p.getFullText(null).toString());
+                                                Log.i("Teste", p.getPlaceId());
+
+
+                                                //Setando marcadores
+                                                List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG);
+                                                FetchPlaceRequest request = FetchPlaceRequest.builder(p.getPlaceId(), fields)
+                                                        .setSessionToken(token)
+                                                        .build();
+
+                                                placesClient.fetchPlace(request)
+                                                        .addOnSuccessListener(new OnSuccessListener<FetchPlaceResponse>() {
+                                                            @Override
+                                                            public void onSuccess(FetchPlaceResponse response) {
+                                                                Place place = response.getPlace();
+                                                                LatLng latLng = place.getLatLng();
+                                                                mMap.addMarker(new MarkerOptions().position(latLng).title(place.getName()));
+                                                            }
+                                                        });
+
+                                            }
+                                        }
+                                    } else {
+                                        Toast.makeText(LocalizacaoMain.this, "ERROR", Toast.LENGTH_SHORT);
+                                    }
+                                }
+                            });
+                        }
+                    });
                 } else {
                     Toast.makeText(LocalizacaoMain.this, fixed.ERROR_OBTER_LOCATION, Toast.LENGTH_SHORT).show();
                 }
@@ -128,7 +269,7 @@ public class LocalizacaoMain extends AppCompatActivity {
             @Override
             public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
 
-                Toast.makeText(LocalizacaoMain.this, locationSettingsResponse.getLocationSettingsStates().isNetworkLocationPresent() + "", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(LocalizacaoMain.this, locationSettingsResponse.getLocationSettingsStates().isNetworkLocationPresent() + "", Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -153,12 +294,12 @@ public class LocalizacaoMain extends AppCompatActivity {
                 }
 
                 for (Location location : locationResult.getLocations()) {
-                    Toast.makeText(LocalizacaoMain.this, location.getLatitude() + "", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(LocalizacaoMain.this, location.getLatitude() + "", Toast.LENGTH_SHORT).show();
 
                     if (!Geocoder.isPresent()) {
                         return;
                     } else {
-                        startIntentService(location);
+                        //startIntentService(location);
                     }
                 }
 
@@ -175,12 +316,14 @@ public class LocalizacaoMain extends AppCompatActivity {
         //-----------USANDO O GEOCODE PRA BUSCAR INFORMAÇÕES COMPLEXAS DE LOCALIZAÇÃO EM BACKGROUND
 
     }
+//
+    //----------INICIANDO A BUSCA POR DADOS COMPLEXOS-----------------------
 
     public void startIntentService(Location location) {
-Intent intent = new Intent(this, FetchAddressService.class);
-intent.putExtra(fixed.RECEIVER, resultReceiver);
-intent.putExtra(fixed.LOCATION_DATA_EXTRA, location);
-startService(intent);
+        Intent intent = new Intent(this, FetchAddressService.class);
+        intent.putExtra(fixed.RECEIVER, resultReceiver);
+        intent.putExtra(fixed.LOCATION_DATA_EXTRA, location);
+        startService(intent);
     }
 
     private class AddressResultReceiver extends ResultReceiver {
@@ -195,6 +338,7 @@ startService(intent);
             if (resultData == null) {
                 return;
             }
+
 
             final String addressOutPut = resultData.getString(fixed.RESULT_DATA_KEY);
 
@@ -212,5 +356,4 @@ startService(intent);
             }
         }
     }
-    //----------FINALIZANDO A BUSCA POR DADOS COMPLEXOS-----------------------
 }
