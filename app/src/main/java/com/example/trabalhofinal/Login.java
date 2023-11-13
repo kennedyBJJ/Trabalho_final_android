@@ -44,13 +44,12 @@ public class Login extends AppCompatActivity {
                 if(usuarioLogado== null){
 
                     Toast.makeText(getApplicationContext(), "NÃO FOI POSSÍVEL LOGAR", Toast.LENGTH_LONG).show();
-                }else {
-
-                    Intent intent = new Intent(Login.this, Inicio.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("usuarioLogado", usuarioLogado);
-                    startActivity(intent);
                 }
+
+                Intent intent = new Intent(Login.this, Inicio.class);
+                intent.putExtra("usuarioLogado", usuarioLogado);
+                startActivity(intent);
+
 
 //                edtUsuario.setText(txt);
             }

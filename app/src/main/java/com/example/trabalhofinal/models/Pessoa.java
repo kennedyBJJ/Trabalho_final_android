@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Pessoa implements Serializable {
 
+    private int ID_USER;
     private String NOME_USER;
     private String DATA_NASCIMENTO;
     private String TELEFONE;
@@ -39,5 +40,13 @@ public class Pessoa implements Serializable {
 
     public void setSENHA(String SENHA) {
         this.SENHA = SENHA;
+    }
+
+    public int getID_USER() {
+        return ID_USER;
+    }
+
+    public void setID_USER(int ID_USER) {
+        this.ID_USER = ID_USER;
     }
 }

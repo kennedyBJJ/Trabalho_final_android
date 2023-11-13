@@ -26,20 +26,32 @@
             android:textStyle="bold" />
 
 
-        <ListView
-            android:id="@+id/listeNovoMedicamento"
+        <EditText
+            android:id="@+id/edtMedicamento"
             style="@style/Edit_Text"
-            android:layout_width="349dp"
-            android:layout_height="462dp"
-            android:layout_marginTop="20dp"
-            android:autofillHints="Não há lembretes cadastrados ainda!" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30sp"
+            android:ems="10"
+            android:hint="Nome Medicamento"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/edtQuantidade"
+            style="@style/Edit_Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30sp"
+            android:ems="10"
+            android:hint="Quantidade"
+            android:inputType="number" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSalvarMedicamento"
             style="@style/Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="30sp"
             android:text="SALVAR"
             android:textAlignment="center"
             android:textColor="#FFFEFE"
@@ -51,11 +63,11 @@
             style="@style/Button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30sp"
             android:text="CANCELAR"
             android:textAlignment="center"
             android:textSize="16sp"
             android:textStyle="bold" />
-
 
 
     </LinearLayout>

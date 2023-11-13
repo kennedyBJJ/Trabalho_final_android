@@ -131,7 +131,7 @@ public class BancoControle {
 
         Pessoa resultado = new Pessoa();
 
-
+        resultado.setID_USER(cursor.getInt(0));
         resultado.setNOME_USER(cursor.getString(1));
         resultado.setTELEFONE(cursor.getString(2));
         resultado.setDATA_NASCIMENTO(cursor.getString(3));
@@ -146,7 +146,7 @@ public class BancoControle {
 
         db = banco.getWritableDatabase();
 
-        Cursor cursor = db.query(banco.getTabelaUser(), null, null, null, null, null, null);
+        Cursor cursor = db.query(banco.getTabelaMedic(), null, null, null, null, null, null);
         int resultado = cursor.getCount();
         cursor.close();
 

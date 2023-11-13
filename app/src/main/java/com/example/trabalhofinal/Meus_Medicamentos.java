@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.trabalhofinal.models.Pessoa;
+
 public class Meus_Medicamentos extends AppCompatActivity {
 
     @Override
@@ -23,6 +25,10 @@ public class Meus_Medicamentos extends AppCompatActivity {
             public void onClick(View v) {
                 // Código para abrir Tela 1
                 Intent intent = new Intent(Meus_Medicamentos.this, Novo_Medicamento.class);
+
+                Intent previous = getIntent();
+                Pessoa usuarioLogado = (Pessoa) previous.getSerializableExtra("usuarioLogado");
+                intent.putExtra("usuarioLogado", usuarioLogado);
                 startActivity(intent);
             }
         });
