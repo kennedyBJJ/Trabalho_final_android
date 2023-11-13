@@ -5,10 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 public class Login extends AppCompatActivity {
 
-
+    EditText edtUsuario;
 
 
     @Override
@@ -19,6 +20,13 @@ public class Login extends AppCompatActivity {
         androidx.appcompat.widget.AppCompatButton  btnEntrar = findViewById(R.id.btnEntrar);
         androidx.appcompat.widget.AppCompatButton  btnCriarConta = findViewById(R.id.btnCriarConta);
 
+        Intent cadastro = getIntent();
+        edtUsuario = findViewById(R.id.edtUsuario);
+        String usuario = cadastro.getStringExtra("usuario");
+
+        if(usuario != null){
+            edtUsuario.setText(usuario);
+        }
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
