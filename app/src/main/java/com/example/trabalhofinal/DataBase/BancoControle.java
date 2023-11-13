@@ -118,25 +118,38 @@ public class BancoControle {
         db.close();
     }
 
-    public Pessoa procurarUsuario(Pessoa usuario){
+    public Pessoa procurarUsuario(String usuario, String senha){
         db = banco.getWritableDatabase();
-        String where = banco.NOME_USER + "=?s AND " + banco.SENHA + "=?s";
-        String[] whereArgs = {usuario.getNOME_USER(), usuario.getSENHA()};
+        String where = String.format(
+                " %s = '%s' AND %s = '%s' ;", banco.NOME_USER, usuario, banco.SENHA, senha
+        );
 
-        Cursor cursor = db.query(banco.TABELA_USER, null, where, whereArgs, null, null, null);
 
-        if(cursor.getCount() != 1){
-            return null;
-        }
+        Cursor cursor = db.query(banco.getTabelaUser(), null, where, null, null, null, null);
+
+        cursor.moveToFirst();
 
         Pessoa resultado = new Pessoa();
 
-        resultado.setNOME_USER(cursor.getString(2));
-        resultado.setTELEFONE(cursor.getString(3));
-        resultado.setDATA_NASCIMENTO(cursor.getString(4));
-        resultado.setSENHA(cursor.getString(5));
 
+        resultado.setNOME_USER(cursor.getString(1));
+        resultado.setTELEFONE(cursor.getString(2));
+        resultado.setDATA_NASCIMENTO(cursor.getString(3));
+        resultado.setSENHA(cursor.getString(4));
+
+        cursor.close();
         return resultado;
 
+    }
+
+    public int count(){
+
+        db = banco.getWritableDatabase();
+
+        Cursor cursor = db.query(banco.getTabelaUser(), null, null, null, null, null, null);
+        int resultado = cursor.getCount();
+        cursor.close();
+
+        return resultado;
     }
 }
