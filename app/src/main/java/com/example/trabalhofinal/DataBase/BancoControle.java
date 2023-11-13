@@ -28,7 +28,9 @@ public class BancoControle {
         values.put(banco.SENHA, SENHA);
 
         //insere os dados no banco
-       if(db.insert(banco.getTabelaUser(),null,values) == -1){
+        int resultado = (int) db.insert(banco.getTabelaUser(),null,values);
+       if(resultado == -1){
+
            return false;
        }
 

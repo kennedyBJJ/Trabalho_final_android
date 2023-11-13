@@ -17,7 +17,7 @@ public class CriarBanco extends SQLiteOpenHelper {
     public static final String HORA_LEMBRETE = "hora_lembrete";
     public static final String NOME_MEDICAMENTO = "nome_medicamento";
     public static final String QUANT_MEDICAMENTO = "quant_medicamento";
-    public static final int VERSION = 1;
+    public static final int VERSION = 2;
     public static final String ID_USER = "_id";
     public static final String ID_LEMBRETE = "idLembrete";
     public static final String ID_MEDIC = "idMedicamento";
@@ -49,21 +49,25 @@ public class CriarBanco extends SQLiteOpenHelper {
                        ID_USER + " INTEGER PRIMARY KEY AUTOINCREMENT, \n" +
                        NOME_USER + " TEXT NOT NULL, \n" +
                        TELEFONE + " TEXT NOT NULL, \n" +
-                       DATA_NASCIMENTO + " DATE NOT NULL \n" +
-                       ");\n";
+                       DATA_NASCIMENTO + " DATE NOT NULL, \n" +
+                        SENHA + " TEXT NOT NULL)" +
+                        ";";
 
         String sql2 = "CREATE TABLE IF NOT EXISTS " + TABELA_MEDIC +
                        "(\n" +
                         ID_MEDIC + " INTEGER PRIMARY KEY AUTOINCREMENT, \n" +
                         NOME_MEDICAMENTO + " TEXT NOT NULL, \n" +
                         QUANT_MEDICAMENTO + " INTEGER NOT NULL, \n" +
+                        ID_USER_FK + " INTEGER," +
                         "FOREIGN KEY (" + ID_USER_FK + ") REFERENCES " + TABELA_USER + "(" + ID_USER + ") \n" +
                         ");\n";
 
         String sql3 = "CREATE TABLE IF NOT EXISTS " + TABELA_LEMBRETE +
                       "(\n" +
-                      ID_LEMBRETE + "INTEGER PRIMARY KEY AUTOINCREMENT, \n" +
-                      HORA_LEMBRETE + "DATETIME NOT NULL, \n" +
+                      ID_LEMBRETE + " INTEGER PRIMARY KEY AUTOINCREMENT, \n" +
+                      ID_USER_FK + " INTEGER," +
+                      ID_MEDIC_FK + " INTEGER," +
+                     HORA_LEMBRETE + " DATETIME NOT NULL, \n" +
                     "FOREIGN KEY (" + ID_USER_FK + ") REFERENCES " + TABELA_USER + "(" + ID_USER + "),\n" +
                     "FOREIGN KEY (" + ID_MEDIC_FK + ") REFERENCES " + TABELA_MEDIC + "(" + ID_MEDIC + ")\n" +
                     ");\n";

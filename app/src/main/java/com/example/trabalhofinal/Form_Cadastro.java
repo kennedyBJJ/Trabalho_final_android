@@ -85,7 +85,6 @@ public class Form_Cadastro extends AppCompatActivity {
 //
         nome = edtNome.getText().toString();
         dataNascimento = edtDataNascimento.getText().toString();
-        dataNascimento = dataNascimento.replace("/", "");
 
         numeroCelular = edtNumeroCelular.getText().toString();
         usuario = edtUsuario.getText().toString();
@@ -108,8 +107,10 @@ public class Form_Cadastro extends AppCompatActivity {
             return false;
         }
 
+        boolean resultado;
 
-        boolean resultado = db.inserirDadosUser(nome, dataNascimento, numeroCelular, senha);
+        resultado = db.inserirDadosUser(usuario, dataNascimento, numeroCelular, senha);
+
 //
         if(!resultado){
             String txt = "NÃO FOI POSSÍVEL CADASTRAR USUÁRIO!! TEM CERTEZA QUE NÃO POSSUI CONTA?";
@@ -119,7 +120,7 @@ public class Form_Cadastro extends AppCompatActivity {
         }
 
 
-        return false;
+        return true;
     }
 
     private void definirFormaDeEscolherData(){
