@@ -2,7 +2,12 @@ package com.example.trabalhofinal.DataBase;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.CursorWrapper;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.trabalhofinal.models.Pessoa;
+
 public class BancoControle {
 
     //permite a conexão com o banco de dados
@@ -111,5 +116,27 @@ public class BancoControle {
 
         db.update(banco.getTabelaMedic(),values,where,null);
         db.close();
+    }
+
+    public Pessoa procurarUsuario(Pessoa usuario){
+        db = banco.getWritableDatabase();
+        String where = banco.NOME_USER + "=?s AND " + banco.SENHA + "=?s";
+        String[] whereArgs = {usuario.getNOME_USER(), usuario.getSENHA()};
+
+        Cursor cursor = db.query(banco.TABELA_USER, null, where, whereArgs, null, null, null);
+
+        if(cursor.getCount() != 1){
+            return null;
+        }
+
+        Pessoa resultado = new Pessoa();
+
+        resultado.setNOME_USER(cursor.getString(2));
+        resultado.setTELEFONE(cursor.getString(3));
+        resultado.setDATA_NASCIMENTO(cursor.getString(4));
+        resultado.setSENHA(cursor.getString(5));
+
+        return resultado;
+
     }
 }

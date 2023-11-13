@@ -17,7 +17,7 @@ public class CriarBanco extends SQLiteOpenHelper {
     public static final String HORA_LEMBRETE = "hora_lembrete";
     public static final String NOME_MEDICAMENTO = "nome_medicamento";
     public static final String QUANT_MEDICAMENTO = "quant_medicamento";
-    public static final int VERSION = 2;
+    public static final int VERSION = 3;
     public static final String ID_USER = "_id";
     public static final String ID_LEMBRETE = "idLembrete";
     public static final String ID_MEDIC = "idMedicamento";
@@ -47,10 +47,10 @@ public class CriarBanco extends SQLiteOpenHelper {
         String sql1 = "CREATE TABLE IF NOT EXISTS " + TABELA_USER +
                       "(\n" +
                        ID_USER + " INTEGER PRIMARY KEY AUTOINCREMENT, \n" +
-                       NOME_USER + " TEXT NOT NULL, \n" +
+                       NOME_USER + " TEXT UNIQUE NOT NULL, \n" +
                        TELEFONE + " TEXT NOT NULL, \n" +
                        DATA_NASCIMENTO + " DATE NOT NULL, \n" +
-                        SENHA + " TEXT NOT NULL)" +
+                        SENHA + " TEXT UNIQUE NOT NULL)" +
                         ";";
 
         String sql2 = "CREATE TABLE IF NOT EXISTS " + TABELA_MEDIC +
