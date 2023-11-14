@@ -34,6 +34,9 @@
             android:name=".Localization.LocalizacaoMain"
             android:exported="false" />
         <activity
+            android:name=".Geolocalizacao"
+            android:exported="false" />
+        <activity
             android:name=".Editar_Medicamento"
             android:exported="false" />
         <activity

@@ -118,13 +118,14 @@
             app:cornerRadius="20dp" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnCancelar"
+            android:id="@+id/btnVoltarInicio"
             style="@style/Button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="VOLTAR"
-            app:cornerRadius="20dp" />
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
 
 
