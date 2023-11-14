@@ -7,7 +7,7 @@ public class Medicamento implements Serializable {
     private int ID_MEDIC;
     private String NOME_MEDICAMENTO;
     private int QUANT_MEDICAMENTO;
-    private String ID_USER_FK;
+    private int ID_USER_FK;
 
     public int getID_MEDIC() {
         return ID_MEDIC;
@@ -33,11 +33,11 @@ public class Medicamento implements Serializable {
         this.QUANT_MEDICAMENTO = QUANT_MEDICAMENTO;
     }
 
-    public String getID_USER_FK() {
+    public int getID_USER_FK() {
         return ID_USER_FK;
     }
 
-    public void setID_USER_FK(String ID_USER_FK) {
+    public void setID_USER_FK(int ID_USER_FK) {
         this.ID_USER_FK = ID_USER_FK;
     }
 }

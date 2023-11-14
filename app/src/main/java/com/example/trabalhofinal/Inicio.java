@@ -28,6 +28,7 @@ public class Inicio extends AppCompatActivity {
                 Intent intent = new Intent(Inicio.this, Meus_Lembretes.class);
 
 
+
                 Intent previous = getIntent();
                 Pessoa usuarioLogado = (Pessoa) previous.getSerializableExtra("usuarioLogado");
                 intent.putExtra("usuarioLogado", usuarioLogado);

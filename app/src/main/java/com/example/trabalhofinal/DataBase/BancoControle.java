@@ -5,8 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.ArrayAdapter;
 
+import com.example.trabalhofinal.models.Medicamento;
 import com.example.trabalhofinal.models.Pessoa;
+
+import java.util.ArrayList;
 
 public class BancoControle {
 
@@ -151,5 +155,34 @@ public class BancoControle {
         cursor.close();
 
         return resultado;
+    }
+
+    public ArrayList<Medicamento> selectMedicamentos(int id_user){
+        db = banco.getWritableDatabase();
+
+        String where = String.format(
+          " %s = %d", banco.ID_USER_FK, id_user
+        );
+
+        ArrayList<Medicamento> resultado= new ArrayList<Medicamento>();
+
+        Cursor cursor = db.query(banco.getTabelaMedic(), null, where, null, null, null, null);
+
+        cursor.moveToFirst();
+
+        while(cursor.moveToNext()){
+
+            Medicamento medicamento = new Medicamento();
+
+            medicamento.setID_MEDIC(cursor.getInt(0));
+            medicamento.setNOME_MEDICAMENTO(cursor.getString(1));
+            medicamento.setQUANT_MEDICAMENTO(cursor.getInt(2));
+            medicamento.setID_USER_FK(cursor.getInt(3));
+
+            resultado.add(medicamento);
+
+        }
+        return resultado;
+
     }
 }
