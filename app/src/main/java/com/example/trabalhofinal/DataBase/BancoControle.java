@@ -6,17 +6,16 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.ArrayAdapter;
-
 import com.example.trabalhofinal.models.Medicamento;
 import com.example.trabalhofinal.models.Pessoa;
 
 import java.util.ArrayList;
 
+
 public class BancoControle {
 
     //permite a conexão com o banco de dados
     private SQLiteDatabase db;
-    //acessa o banco criado
     private CriarBanco banco;
 
 

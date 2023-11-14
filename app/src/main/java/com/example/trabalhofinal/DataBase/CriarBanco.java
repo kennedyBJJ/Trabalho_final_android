@@ -24,8 +24,9 @@ public class CriarBanco extends SQLiteOpenHelper {
     public static final String ID_USER_FK = "idUser_FK";
     public static final String ID_MEDIC_FK = "idMedic_FK";
 
+
     public CriarBanco(Context context) {
-        super(context, BANCO, null, VERSION);
+        super(context, CriarBanco.BANCO, null, CriarBanco.VERSION);
     }
 
     public String getTabelaUser(){

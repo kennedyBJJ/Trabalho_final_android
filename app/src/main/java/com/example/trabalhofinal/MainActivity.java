@@ -6,9 +6,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.widget.VideoView;
+
+import com.example.trabalhofinal.Localization.LocalizacaoMain;
 
 public class MainActivity extends AppCompatActivity {
     //Timer
@@ -23,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                //mofifiquei para testes
                 Intent i = new Intent(MainActivity.this, Login.class);
                 startActivity(i);
 
