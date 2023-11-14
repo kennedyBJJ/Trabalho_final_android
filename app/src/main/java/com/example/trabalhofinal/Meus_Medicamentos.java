@@ -53,8 +53,13 @@ public class Meus_Medicamentos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Código para abrir Tela 1
-//                Intent intent = new Intent(Meus_Medicamentos.this, Inicio.class);
-//                startActivity(intent);
+                Intent intent = new Intent(Meus_Medicamentos.this, Inicio.class);
+
+                Intent previous = getIntent();
+                Pessoa usuarioLogado = (Pessoa) previous.getSerializableExtra("usuarioLogado");
+                intent.putExtra("usuarioLogado", usuarioLogado);
+
+                startActivity(intent);
             }
         });
 

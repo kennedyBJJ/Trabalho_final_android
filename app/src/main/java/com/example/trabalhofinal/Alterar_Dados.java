@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.trabalhofinal.models.Pessoa;
+
 public class Alterar_Dados extends AppCompatActivity {
 
     @Override
@@ -23,6 +25,10 @@ public class Alterar_Dados extends AppCompatActivity {
             public void onClick(View v) {
                 // Código para abrir Tela 1
                 Intent intent = new Intent(Alterar_Dados.this, Minha_Conta.class);
+                Intent previous = getIntent();
+                Pessoa usuarioLogado = (Pessoa) previous.getSerializableExtra("usuarioLogado");
+                intent.putExtra("usuarioLogado", usuarioLogado);
+
                 startActivity(intent);
             }
         });
@@ -31,6 +37,10 @@ public class Alterar_Dados extends AppCompatActivity {
             public void onClick(View v) {
                 // Código para abrir Tela 1
                 Intent intent = new Intent(Alterar_Dados.this, Minha_Conta.class);
+                Intent previous = getIntent();
+                Pessoa usuarioLogado = (Pessoa) previous.getSerializableExtra("usuarioLogado");
+                intent.putExtra("usuarioLogado", usuarioLogado);
+
                 startActivity(intent);
             }
         });

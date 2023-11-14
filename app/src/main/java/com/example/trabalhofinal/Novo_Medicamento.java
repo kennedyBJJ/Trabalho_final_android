@@ -29,7 +29,13 @@ public class Novo_Medicamento extends AppCompatActivity {
 
                 if(cadastrouMedicamento()) {
 
+
                     Intent intent = new Intent(Novo_Medicamento.this, Meus_Medicamentos.class);
+
+                    Intent previous = getIntent();
+                    Pessoa usuarioLogado = (Pessoa) previous.getSerializableExtra("usuarioLogado");
+                    intent.putExtra("usuarioLogado", usuarioLogado);
+
                     startActivity(intent);
                 }
             }
@@ -40,6 +46,11 @@ public class Novo_Medicamento extends AppCompatActivity {
             public void onClick(View v) {
                 // Código para abrir Tela 1
                 Intent intent = new Intent(Novo_Medicamento.this, Meus_Medicamentos.class);
+
+                Intent previous = getIntent();
+                Pessoa usuarioLogado = (Pessoa) previous.getSerializableExtra("usuarioLogado");
+                intent.putExtra("usuarioLogado", usuarioLogado);
+
                 startActivity(intent);
             }
         });
